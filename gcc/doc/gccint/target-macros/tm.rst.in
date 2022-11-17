@@ -2330,7 +2330,7 @@
 
 [TARGET_LIBC_HAS_FAST_FUNCTION]
 
-[MODIFY_JNI_METHOD_CALL] (@var{mdecl})
+[MODIFY_JNI_METHOD_CALL]
 .. function:: MODIFY_JNI_METHOD_CALL
 
   Define this macro to a C expression representing a variant of the
@@ -2345,6 +2345,8 @@
                                 build_tree_list
                                 (get_identifier ("stdcall"),
                                  NULL))
+
+[MODIFY_JNI_METHOD_CALL]
 
 [TARGET_CANNOT_MODIFY_JUMPS_P]
 .. function:: bool TARGET_CANNOT_MODIFY_JUMPS_P (void)
@@ -5024,6 +5026,14 @@
   The default implementation always returns true.
 
 [TARGET_VERIFY_TYPE_CONTEXT]
+
+[TARGET_USE_JCR_SECTION]
+.. function:: TARGET_USE_JCR_SECTION
+  This macro determines whether to use the JCR section to register Java
+  classes. By default, ``TARGET_USE_JCR_SECTION`` is defined to 1 if both
+  ``SUPPORTS_WEAK`` and ``TARGET_HAVE_NAMED_SECTIONS`` are true, else 0.
+
+[TARGET_USE_JCR_SECTION]
 
 [TARGET_CAN_CHANGE_MODE_CLASS]
 .. function:: bool TARGET_CAN_CHANGE_MODE_CLASS (machine_mode from, machine_mode to, reg_class_t rclass)
