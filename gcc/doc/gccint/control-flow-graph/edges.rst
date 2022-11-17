@@ -117,8 +117,8 @@ the following types:
   Exception handling edges represent possible control transfers from a
   trapping instruction to an exception handler.  The definition of
   'trapping' varies.  In C++, only function calls can throw, but for
-  Ada exceptions like division by zero or segmentation fault are
-  defined and thus each instruction possibly throwing this kind of
+  Java and Ada, exceptions like division by zero or segmentation fault
+  are defined and thus each instruction possibly throwing this kind of
   exception needs to be handled as control flow instruction.  Exception
   edges have the ``EDGE_ABNORMAL`` and ``EDGE_EH`` flags set.
 

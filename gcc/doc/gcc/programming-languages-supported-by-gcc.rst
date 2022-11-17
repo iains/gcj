@@ -3,7 +3,7 @@
   This is part of the GCC manual.
   For copying conditions, see the copyright.rst file.
 
-.. index:: GCC, GNU Compiler Collection, GNU C Compiler, Ada, D, Fortran, Go, Objective-C, Objective-C++
+.. index:: GCC, GNU Compiler Collection, GNU C Compiler, Ada, D, Fortran, Go, Java, Objective-C, Objective-C++
 
 .. _g++-and-gcc:
 
@@ -12,7 +12,7 @@ Programming Languages Supported by GCC
 
 GCC stands for 'GNU Compiler Collection'.  GCC is an integrated
 distribution of compilers for several major programming languages.  These
-languages currently include C, C++, Objective-C, Objective-C++,
+languages currently include C, C++, Objective-C, Objective-C++, Java,
 Fortran, Ada, D, and Go.
 
 The abbreviation :dfn:`GCC` has multiple meanings in common use.  The

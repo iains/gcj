@@ -111,7 +111,8 @@ it.
   This option instructs the compiler to assume that signed arithmetic
   overflow of addition, subtraction and multiplication wraps around
   using twos-complement representation.  This flag enables some optimizations
-  and disables others.
+  and disables others.  This option is enabled by default for the Java
+  front end, as required by the Java language specification.
   The options :option:`-ftrapv` and :option:`-fwrapv` override each other, so using
   :option:`-ftrapv` :option:`-fwrapv` on the command-line results in
   :option:`-fwrapv` being effective.  Note that only active options override, so

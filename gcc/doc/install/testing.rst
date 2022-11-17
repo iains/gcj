@@ -61,6 +61,7 @@ on a simulator as described at https://gcc.gnu.org/simtest-howto.html.
 .. toctree::
   :maxdepth: 2
 
+  additional-testing-for-java-class-libraries
   how-can-you-run-the-testsuite-on-selected-tests
   passing-options-and-running-multiple-testsuites
   how-to-interpret-test-results

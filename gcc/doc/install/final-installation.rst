@@ -26,7 +26,7 @@ you specified with the :option:`--prefix` to configure (or
 :samp:`/usr/local` by default).  (If you specified :option:`--bindir`,
 that directory will be used instead; otherwise, if you specified
 :option:`--exec-prefix`, :samp:`{exec-prefix}/bin` will be used.)
-Headers for the C++ library are installed in
+Headers for the C++ and Java libraries are installed in
 :samp:`{prefix}/include`; libraries in :samp:`{libdir}`
 (normally :samp:`{prefix}/lib`); internal parts of the compiler in
 :samp:`{libdir}/gcc` and :samp:`{libexecdir}/gcc`; documentation

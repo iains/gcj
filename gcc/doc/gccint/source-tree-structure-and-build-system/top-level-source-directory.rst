@@ -72,7 +72,7 @@ subdirectories that contain parts of GCC and its runtime libraries:
   The Decimal Float support library.
 
 :samp:`libffi`
-  The ``libffi`` library, used as part of the Go runtime library.
+  The ``libffi`` library, used as part of the Go and Java runtime libraries.
 
 :samp:`libgcc`
   The GCC runtime library.
@@ -94,6 +94,9 @@ subdirectories that contain parts of GCC and its runtime libraries:
 
 :samp:`libitm`
   The runtime support library for transactional memory.
+
+:samp:`libjava`
+  The Java runtime library.
 
 :samp:`libobjc`
   The Objective-C and Objective-C++ runtime library.
@@ -126,8 +129,9 @@ subdirectories that contain parts of GCC and its runtime libraries:
   Scripts used by the ``gccadmin`` account on ``gcc.gnu.org``.
 
 :samp:`zlib`
-  The ``zlib`` compression library, used for compressing and
-  uncompressing GCC's intermediate language in LTO object files.
+  The ``zlib`` compression library, used by the Java front end, as
+  part of the Java runtime library, and for compressing and uncompressing
+  GCC's intermediate language in LTO object files.
 
 The build system in the top level directory, including how recursion
 into subdirectories works and how building runtime libraries for

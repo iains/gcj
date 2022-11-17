@@ -412,7 +412,7 @@ corresponding :option:`--without` option.
   will be built.  Package names currently recognized in the GCC tree are
   :samp:`libgcc` (also known as :samp:`gcc`), :samp:`libstdc++` (not
   :samp:`libstdc++-v3`), :samp:`libffi`, :samp:`zlib`, :samp:`boehm-gc`,
-  :samp:`ada`, :samp:`libada`, :samp:`libgo`, :samp:`libobjc`, and :samp:`libphobos`.
+  :samp:`ada`, :samp:`libada`, :samp:`libjava`, :samp:`libgo`, :samp:`libobjc`, and :samp:`libphobos`.
   Note :samp:`libiberty` does not support shared libraries at all.
 
   Use :option:`--disable-shared` to build only static libraries.  Note that
@@ -771,7 +771,7 @@ corresponding :option:`--without` option.
 
   Specify that the target
   supports threads.  This affects the Objective-C compiler and runtime
-  library, and exception handling for other languages like C++.
+  library, and exception handling for other languages like C++ and Java.
   On some systems, this is the default.
 
   In general, the best (and, in many cases, the only known) threading
@@ -790,7 +790,7 @@ corresponding :option:`--without` option.
   Specify that
   :samp:`{lib}` is the thread support library.  This affects the Objective-C
   compiler and runtime library, and exception handling for other languages
-  like C++.  The possibilities for :samp:`{lib}` are:
+  like C++ and Java.  The possibilities for :samp:`{lib}` are:
 
   ``aix``
     AIX thread support.
@@ -1269,7 +1269,7 @@ corresponding :option:`--without` option.
 
   Currently, you can use any of the following:
   ``all``, ``default``, ``ada``, ``c``, ``c++``, ``d``,
-  ``fortran``, ``go``, ``jit``, ``lto``, ``objc``, ``obj-c++``.
+  ``fortran``, ``go``, ``java``, ``jit``, ``lto``, ``objc``, ``obj-c++``.
   Building the Ada compiler has special requirements, see below.
   If you do not pass this flag, or specify the option ``default``, then the
   default languages available in the :samp:`gcc` sub-tree will be configured.
@@ -1997,6 +1997,261 @@ The following options only apply to building cross compilers.
   :command:`ranlib` and :command:`strip` if necessary, and possibly
   :command:`objdump`.  Otherwise, GCC may use an inconsistent set of
   tools.
+
+Java-Specific Options
+=====================
+
+The following option applies to the build of the Java front end.
+
+
+.. option:: --disable-libgcj
+  Specify that the run-time libraries
+  used by GCJ should not be built.  This is useful in case you intend
+  to use GCJ with some other run-time, or you're going to install it
+  separately, or it just happens not to build on your particular
+  machine.  In general, if the Java front end is enabled, the GCJ
+  libraries will be enabled too, unless they're known to not work on
+  the target platform.  If GCJ is enabled but :samp:`libgcj` isn't built, you
+  may need to port it; in this case, before modifying the top-level
+  :samp:`configure.ac` so that :samp:`libgcj` is enabled by default on this platform,
+  you may use :option:`--enable-libgcj` to override the default.
+
+
+The following options apply to building :samp:`libgcj`.
+
+General Options
+^^^^^^^^^^^^^^^
+
+.. option:: --enable-objc-gc
+
+  Specify that an additional variant of the GNU Objective-C runtime library
+  is built, using an external build of the Boehm-Demers-Weiser garbage
+  collector (https://www.hboehm.info/gc/).  This library needs to be
+  available for each multilib variant, unless configured with
+  :option:`--enable-objc-gc=auto` in which case the build of the
+  additional runtime library is skipped when not available and the build
+  continues.
+
+.. option:: --with-target-bdw-gc=list
+
+  Specify search directories for the garbage collector header files and
+  libraries. :samp:`{list}` is a comma separated list of key value pairs of the
+  form :samp:`{multilibdir}={path}`, where the default multilib key
+  is named as :samp:`.` (dot), or is omitted (e.g.
+  :samp:`--with-target-bdw-gc=/opt/bdw-gc,32=/opt-bdw-gc32`).
+
+  The options :option:`--with-target-bdw-gc-include` and
+  :option:`--with-target-bdw-gc-lib` must always be specified together
+  for each multilib variant and they take precedence over
+  :option:`--with-target-bdw-gc`.  If :option:`--with-target-bdw-gc-include`
+  is missing values for a multilib, then the value for the default
+  multilib is used (e.g. :samp:`--with-target-bdw-gc-include=/opt/bdw-gc/include`
+  :samp:`--with-target-bdw-gc-lib=/opt/bdw-gc/lib64,32=/opt-bdw-gc/lib32`).
+  If none of these options are specified, the library is assumed in
+  default locations.
+
+
+.. option:: --enable-java-maintainer-mode
+  By default the :samp:`libjava` build will not attempt to compile the
+  :samp:`.java` source files to :samp:`.class`.  Instead, it will use the
+  :samp:`.class` files from the source tree.  If you use this option you
+  must have executables named :command:`ecj11 and :command:`gjavah1 in your path
+  for use by the build.  You must use this option if you intend to
+  modify any :samp:`.java` files in :samp:`libjava`.
+
+.. option:: --with-java-home=:samp:`dirname`
+  This :samp:`libjava` option overrides the default value of the
+  :samp:`java.home` system property.  It is also used to set
+  :samp:`sun.boot.class.path` to :samp:`{dirname}/lib/rt.jar`.  By
+  default :samp:`java.home` is set to :samp:`prefix` and
+  :samp:`sun.boot.class.path` to
+  :samp:`{datadir}/java/libgcj-{version}.jar`.
+
+.. option:: --with-ecj-jar=:samp:`filename`
+  This option can be used to specify the location of an external jar
+  file containing the Eclipse Java compiler.  A specially modified
+  version of this compiler is used by :command:`gcj1` to parse
+  :samp:`.java` source files.  If this option is given, the
+  :samp:`libjava` build will create and install an :samp:`ecj1` executable
+  which uses this jar file at runtime.
+
+  If this option is not given, but an :samp:`ecj.jar` file is found in
+  the topmost source tree at configure time, then the :samp:`libgcj`
+  build will create and install :samp:`ecj1`, and will also install the
+  discovered :samp:`ecj.jar` into a suitable place in the install tree.
+
+  If :samp:`ecj1` is not installed, then the user will have to supply one
+  on his path in order for :command:`gcj1` to properly parse :samp:`.java`
+  source files.  A suitable jar is available from
+  ftp://sourceware.org/pub/java/.
+
+.. option:: --disable-getenv-properties
+  Don't set system properties from :envvar:`GCJ_PROPERTIES`.
+
+.. option:: --enable-hash-synchronization
+  Use a global hash table for monitor locks.  Ordinarily,
+  :samp:`libgcj`'s :samp:`configure` script automatically makes
+  the correct choice for this option for your platform.  Only use
+  this if you know you need the library to be configured differently.
+
+.. option:: --enable-interpreter
+  Enable the Java interpreter.  The interpreter is automatically
+  enabled by default on all platforms that support it.  This option
+  is really only useful if you want to disable the interpreter
+  (using :option:`--disable-interpreter`).
+
+.. option:: --disable-java-net
+  Disable java.net.  This disables the native part of java.net only,
+  using non-functional stubs for native method implementations.
+
+.. option:: --disable-jvmpi
+  Disable JVMPI support.
+
+.. option:: --disable-libgcj-bc
+  Disable BC ABI compilation of certain parts of libgcj.  By default,
+  some portions of libgcj are compiled with :option:`-findirect-dispatch`
+  and :option:`-fno-indirect-classes`, allowing them to be overridden at
+  run-time.
+
+  If :option:`--disable-libgcj-bc` is specified, libgcj is built without
+  these options.  This allows the compile-time linker to resolve
+  dependencies when statically linking to libgcj.  However it makes it
+  impossible to override the affected portions of libgcj at run-time.
+
+.. option:: --enable-reduced-reflection
+  Build most of libgcj with :option:`-freduced-reflection`.  This reduces
+  the size of libgcj at the expense of not being able to do accurate
+  reflection on the classes it contains.  This option is safe if you
+  know that code using libgcj will never use reflection on the standard
+  runtime classes in libgcj (including using serialization, RMI or CORBA).
+
+.. option:: --with-ecos
+  Enable runtime eCos target support.
+
+.. option:: --without-libffi
+  Don't use :samp:`libffi`.  This will disable the interpreter and JNI
+  support as well, as these require :samp:`libffi` to work.
+
+.. option:: --enable-libgcj-debug
+  Enable runtime debugging code.
+
+.. option:: --enable-libgcj-multifile
+  If specified, causes all :samp:`.java` source files to be
+  compiled into :samp:`.class` files in one invocation of
+  :samp:`gcj`.  This can speed up build time, but is more
+  resource-intensive.  If this option is unspecified or
+  disabled, :samp:`gcj` is invoked once for each :samp:`.java`
+  file to compile into a :samp:`.class` file.
+
+.. option:: --with-libiconv-prefix=DIR
+  Search for libiconv in :samp:`DIR/include` and :samp:`DIR/lib`.
+
+.. option:: --enable-sjlj-exceptions
+  Force use of the ``setjmp/longjmp``-based scheme for exceptions.
+  :samp:`configure` ordinarily picks the correct value based on the platform.
+  Only use this option if you are sure you need a different setting.
+
+.. option:: --with-system-zlib
+  Use installed :samp:`zlib` rather than that included with GCC@.
+
+.. option:: --with-win32-nlsapi=ansi, unicows or unicode
+  Indicates how MinGW :samp:`libgcj` translates between UNICODE
+  characters and the Win32 API@.
+
+.. option:: --enable-java-home
+  If enabled, this creates a JPackage compatible SDK environment during install.
+  Note that if --enable-java-home is used, --with-arch-directory=ARCH must also
+  be specified.
+
+.. option:: --with-arch-directory=ARCH
+  Specifies the name to use for the :samp:`jre/lib/ARCH` directory in the SDK
+  environment created when --enable-java-home is passed. Typical names for this
+  directory include i386, amd64, ia64, etc.
+
+.. option:: --with-os-directory=DIR
+  Specifies the OS directory for the SDK include directory. This is set to auto
+  detect, and is typically 'linux'.
+
+.. option:: --with-origin-name=NAME
+  Specifies the JPackage origin name. This defaults to the 'gcj' in
+  java-1.5.0-gcj.
+
+.. option:: --with-arch-suffix=SUFFIX
+  Specifies the suffix for the sdk directory. Defaults to the empty string.
+  Examples include '.x86_64' in 'java-1.5.0-gcj-1.5.0.0.x86_64'.
+
+.. option:: --with-jvm-root-dir=DIR
+  Specifies where to install the SDK. Default is $(prefix)/lib/jvm.
+
+.. option:: --with-jvm-jar-dir=DIR
+  Specifies where to install jars. Default is $(prefix)/lib/jvm-exports.
+
+.. option:: --with-python-dir=DIR
+  Specifies where to install the Python modules used for aot-compile. DIR should
+  not include the prefix used in installation. For example, if the Python modules
+  are to be installed in /usr/lib/python2.5/site-packages, then
+  --with-python-dir=/lib/python2.5/site-packages should be passed. If this is
+  not specified, then the Python modules are installed in $(prefix)/share/python.
+
+.. option:: --enable-aot-compile-rpm
+  Adds aot-compile-rpm to the list of installed scripts.
+
+.. option:: --enable-browser-plugin
+  Build the gcjwebplugin web browser plugin.
+
+.. option:: --enable-static-libjava
+  Build static libraries in libjava. The default is to only build shared
+  libraries.
+
+.. option:: ansi
+  Use the single-byte ``char`` and the Win32 A functions natively,
+  translating to and from UNICODE when using these functions.  If
+  unspecified, this is the default.
+
+.. option:: unicows
+  Use the ``WCHAR`` and Win32 W functions natively.  Adds
+  ``-lunicows`` to :samp:`libgcj.spec` to link with :samp:`libunicows`.
+  :samp:`unicows.dll` needs to be deployed on Microsoft Windows 9X machines
+  running built executables.  :samp:`libunicows.a`, an open-source
+  import library around Microsoft's ``unicows.dll``, is obtained from
+  http://libunicows.sourceforge.net/, which also gives details
+  on getting :samp:`unicows.dll` from Microsoft.
+
+.. option:: unicode
+  Use the ``WCHAR`` and Win32 W functions natively.  Does *not*
+  add ``-lunicows`` to :samp:`libgcj.spec`.  The built executables will
+  only run on Microsoft Windows NT and above.
+
+AWT-Specific Options
+^^^^^^^^^^^^^^^^^^^^
+
+.. option:: --with-x
+  Use the X Window System.
+
+.. option:: --enable-java-awt=PEER(S)
+  Specifies the AWT peer library or libraries to build alongside
+  :samp:`libgcj`.  If this option is unspecified or disabled, AWT
+  will be non-functional.  Current valid values are :option:`gtk` and
+  :option:`xlib`.  Multiple libraries should be separated by a
+  comma (i.e.: :option:`--enable-java-awt=gtk,xlib`).
+
+.. option:: --enable-gtk-cairo
+  Build the cairo Graphics2D implementation on GTK.
+
+.. option:: --disable-gtktest
+  Do not try to compile and run a test GTK+ program.
+
+.. option:: --disable-glibtest
+  Do not try to compile and run a test GLIB program.
+
+.. option:: --with-libart-prefix=PFX
+  Prefix where libart is installed (optional).
+
+.. option:: --with-libart-exec-prefix=PFX
+  Exec prefix where libart is installed (optional).
+
+.. option:: --disable-libarttest
+  Do not try to compile and run a test libart program.
 
 Overriding configure test results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

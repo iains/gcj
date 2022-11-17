@@ -22,6 +22,7 @@ here;
   testsuites/directives-used-within-dejagnu-tests
   testsuites/ada-language-testsuites
   testsuites/c-language-testsuites
+  testsuites/the-java-library-testsuites
   testsuites/support-for-testing-link-time-optimizations
   testsuites/support-for-testing-gcov
   testsuites/support-for-testing-profile-directed-optimizations

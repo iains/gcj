@@ -11,3 +11,6 @@ conformance and compatibility of the Ada compiler.
 
 See :ref:`gfortran:standards`, for details
 of standards supported by GNU Fortran.
+
+See :ref:`gcj:standards`, for details
+for details of compatibility between :command:`gcj` and the Java Platform.

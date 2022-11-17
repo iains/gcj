@@ -9,8 +9,8 @@ How can you run the testsuite on selected tests?
 In order to run sets of tests selectively, there are targets
 :samp:`make check-gcc` and language specific :samp:`make check-c`,
 :samp:`make check-c++`, :samp:`make check-d` :samp:`make check-fortran`,
-:samp:`make check-ada`, :samp:`make check-objc`, :samp:`make check-obj-c++`,
-:samp:`make check-lto`
+:samp:`make check-java`, :samp:`make check-ada`, :samp:`make check-objc`,
+:samp:`make check-obj-c++`, :samp:`make check-lto`
 in the :samp:`gcc` subdirectory of the object directory.  You can also
 just run :samp:`make check` in a subdirectory of the object directory.
 

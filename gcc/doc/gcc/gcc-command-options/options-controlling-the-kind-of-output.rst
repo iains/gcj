@@ -90,6 +90,13 @@ compilation is done:
 :samp:`{file}.dd`
   D documentation code (Ddoc).
 
+
+:samp:`{file}.java`
+:samp:`{file}.class`
+:samp:`{file}.zip`
+:samp:`{file}.jar`
+  FIXME: Descriptions of Java file types.
+
 :samp:`{file}.ads`
   Ada source code file that contains a library unit declaration (a
   declaration of a package, subprogram, or generic, or a generic
@@ -130,7 +137,7 @@ You can specify the input language explicitly with the :option:`-x` option:
   :samp:`objective-c` :samp:`objective-c-header` :samp:`objective-c-cpp-output`
   :samp:`objective-c++` :samp:`objective-c++-header` :samp:`objective-c++-cpp-output`
   :samp:`assembler` :samp:`assembler-with-cpp` :samp:`ada` :samp:`d`
-  :samp:`f77` :samp:`f77-cpp-input` :samp:`f95` :samp:`f95-cpp-input` :samp:`go`
+  :samp:`f77` :samp:`f77-cpp-input` :samp:`f95` :samp:`f95-cpp-input` :samp:`go` :samp:`java`
 
 ``-x none``
   Turn off any specification of a language, so that subsequent files are

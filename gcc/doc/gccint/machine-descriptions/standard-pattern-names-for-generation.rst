@@ -2934,7 +2934,8 @@ sibcall_epilogue
 
 trap
   This pattern, if defined, signals an error, typically by causing some
-  kind of signal to be raised.
+  kind of signal to be raised.  Among other places, it is used by the Java
+  front end to signal `invalid array index' exceptions.
 
   .. index:: ctrapMM4 instruction pattern
 

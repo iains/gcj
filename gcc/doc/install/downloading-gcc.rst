@@ -16,9 +16,9 @@ HTTPS as tarballs compressed with :command:`gzip` or :command:`bzip2`.
 Please refer to the `releases web page <https://gcc.gnu.org/releases.html>`_
 for information on how to obtain GCC.
 
-The source distribution includes the C, C++, Objective-C, Fortran,
+The source distribution includes the C, C++, Objective-C, Fortran, Java,
 and Ada (in the case of GCC 3.1 and later) compilers, as well as
-runtime libraries for C++, Objective-C, and Fortran.
+runtime libraries for C++, Objective-C, Fortran, and Java.
 For previous versions these were downloadable as separate components such
 as the core GCC distribution, which included the C language front end and
 shared components, and language-specific distributions including the

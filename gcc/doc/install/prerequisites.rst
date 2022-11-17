@@ -165,6 +165,10 @@ Tools/packages necessary for building GCC
   repository (mainly Unicode-related and rarely changing) from source
   tables.
 
+* :command:'jar', or InfoZIP (:command:'zip' and :command:'unzip')
+
+  Necessary to build libgcj, the GCJ runtime.
+
   Used by :command:`automake`.
 
 Several support libraries are necessary to build GCC, some are required,
@@ -317,3 +321,24 @@ Tools/packages necessary for modifying GCC
 
   Necessary when applying patches, created with :command:`diff`, to one's
   own sources.
+
+* ecj1
+* gjavah
+  If you wish to modify :samp:`.java' files in libjava, you will need to
+  configure with :option:`--enable-java-maintainer-mode`, and you will need
+  to have executables named :command:`ecj1` and :command:`gjavah` in your path.
+  The :command:`ecj1` executable should run the Eclipse Java compiler via
+  the GCC-specific entry point.  You can download a suitable jar from
+  ftp://sourceware.org/pub/java/, or by running the script
+:command:`contrib/download_ecj`.
+
+* antlr.jar version 2.7.1 (or later)
+* antlr binary
+
+  If you wish to build the :command:`gjdoc` binary in libjava, you will
+  need to have an :samp:`antlr.jar' library available. The library is
+  searched for in system locations but can be specified with
+  :option:`--with-antlr-jar=` instead.  When configuring with
+  :option:`--enable-java-maintainer-mode`, you will need to have one of
+  the executables named :command:`cantlr`, :command:`runantlr` or
+  :command:`antlr` in your path.

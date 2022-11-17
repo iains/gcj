@@ -114,7 +114,7 @@ and Objective-C++ programs:
 .. option:: -fobjc-exceptions
 
   Enable syntactic support for structured exception handling in
-  Objective-C, similar to what is offered by C++.  This option
+  Objective-C, similar to what is offered by C++ and Java.  This option
   is required to use the Objective-C keywords ``@try``,
   ``@throw``, ``@catch``, ``@finally`` and
   ``@synchronized``.  This option is available with both the GNU

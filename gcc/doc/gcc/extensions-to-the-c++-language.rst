@@ -24,6 +24,7 @@ test specifically for GNU C++ (see :ref:`cpp:common-predefined-macros`).
   extensions-to-the-c++-language/function-multiversioning
   extensions-to-the-c++-language/type-traits
   extensions-to-the-c++-language/c++-concepts
+  extensions-to-the-c++-language/java-exceptions
   extensions-to-the-c++-language/deprecated-features
   extensions-to-the-c++-language/backwards-compatibility
   extensions-to-the-c++-language/when-is-a-volatile-c++-object-accessed

@@ -277,7 +277,7 @@ not doing a link step.
   across different shared libraries.  In that case, each of the libraries
   as well as the application itself should use the shared :samp:`libgcc`.
 
-  Therefore, the G++ driver automatically adds :option:`-shared-libgcc`
+  Therefore, the G++ and GCJ drivers automatically add :option:`-shared-libgcc`
   whenever you build a shared library or a main executable, because C++
   programs typically use exceptions, so this is the right thing to do.
 
@@ -293,7 +293,8 @@ not doing a link step.
   costs at library load time.
 
   However, if a library or main executable is supposed to throw or catch
-  exceptions, you must link it using the G++ driver, or using the option
+  exceptions, you must link it using the G++ or GCJ driver, as appropriate
+  for the languages used in the program, or using the option
   :option:`-shared-libgcc`, such that it is linked with the shared
   :samp:`libgcc`.
 

@@ -98,7 +98,8 @@ can just use ``NEXT_INSN`` and ``PREV_INSN`` instead.  See :ref:`insns`.
 Usually a code manipulating pass simplifies the instruction stream and
 the flow of control, possibly eliminating some edges.  This may for
 example happen when a conditional jump is replaced with an
-unconditional jump.  Updating of edges
+unconditional jump, but also when simplifying possibly trapping
+instruction to non-trapping while compiling Java.  Updating of edges
 is not transparent and each optimization pass is required to do so
 manually.  However only few cases occur in practice.  The pass may
 call ``purge_dead_edges`` on a given basic block to remove

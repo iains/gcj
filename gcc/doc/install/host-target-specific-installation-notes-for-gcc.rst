@@ -197,9 +197,9 @@ The version of binutils installed in :samp:`/usr/bin` probably works
 with this release of GCC.  Bootstrapping against the latest GNU
 binutils and/or the version found in :samp:`/usr/ports/devel/binutils` has
 been known to enable additional features and improve overall testsuite
-results.  However, it is currently known that boehm-gc may not configure
-properly on FreeBSD prior to the FreeBSD 7.0 release with GNU binutils
-after 2.16.1.
+results.  However, it is currently known that boehm-gc (which itself
+is required for java) may not configure properly on FreeBSD prior to 
+the FreeBSD 7.0 release with GNU binutils after 2.16.1.
 
 ft32-\*-elf
 ===========
@@ -286,7 +286,8 @@ hppa\*-hp-hpux11
 GCC 3.0 and up support HP-UX 11.  GCC 2.95.x is not supported and cannot
 be used to compile GCC 3.0 and up.
 
-The libffi library haven't been ported to 64-bit HP-UXand doesn't build.
+The libffi and libjava libraries haven't been ported to 64-bit HP-UX
+and don't build.
 
 Refer to `binaries page <install:binaries>` for information about obtaining
 precompiled GCC binaries for HP-UX.  Precompiled binaries must be obtained
@@ -299,7 +300,11 @@ unbundled compiler, or a binary distribution of GCC.
 
 It is possible to build GCC 3.3 starting with the bundled HP compiler,
 but the process requires several steps.  GCC 3.3 can then be used to
-build later versions.
+build later versions. The fastjar program contains ISO C code and
+can't be built with the HP bundled compiler.  This problem can be
+avoided by not building the Java language.  For example, use the
+:option:'--enable-languages="c,c++,f77,objc' option in your configure
+command.
 
 There are several possible approaches to building the distribution.
 Binutils can be built first using the HP tools.  Then, the GCC
@@ -973,7 +978,7 @@ you can install a pre-built GCC to bootstrap and install GCC.  See the
 :ref:`binaries` for details.
 
 The Solaris 2 :command:`/bin/sh` will often fail to configure
-:samp:`libstdc++-v3`.  We therefore recommend using the
+:samp:`libstdc++-v3` or :samp:`libjava`.  We therefore recommend using the
 following initial sequence of commands
 
 .. code-block:: bash
@@ -1028,6 +1033,9 @@ needed.  That library wasn't built by default in GCC 9--11 on SPARC, or
 on x86 when the Solaris assembler is used, but can be enabled by
 configuring with :option:`--enable-libphobos`.  Also, GDC 9.4.0 is
 required on x86, while GDC 9.3.0 is known to work on SPARC.
+
+GNU :command:'make' version 3.81 or later is required to build libjava
+with the Solaris linker.
 
 The versions of the GNU Multiple Precision Library (GMP), the MPFR
 library and the MPC library bundled with Solaris 11.3 and later are

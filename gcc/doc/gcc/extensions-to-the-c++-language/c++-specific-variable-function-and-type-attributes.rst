@@ -76,6 +76,15 @@ Some attributes only make sense for C++ programs.
   Note that the particular values of :samp:`{priority}` do not matter; only their
   relative ordering.
 
+.. index:: java_interface type attribute
+
+.. gcc-attr:: java_interface
+
+  This type attribute informs C++ that the class is a Java interface.  It may
+  only be applied to classes declared within an ``{extern "Java"}`` block.
+  Calls to methods declared in this interface are dispatched using GCJ's
+  interface table mechanism, instead of regular virtual table dispatch.
+
 .. index:: warn_unused type attribute
 
 .. gcc-attr:: warn_unused
