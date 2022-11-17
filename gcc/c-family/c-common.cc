@@ -4490,6 +4490,8 @@ c_common_nodes_and_builtins (void)
     TYPE_NAME (void_type_node) = void_name;
   }
 
+  void_list_node = build_void_list_node ();
+
   /* Make a type to be the domain of a few array types
      whose domains don't really matter.
      200 is small enough that it always fits in size_t
